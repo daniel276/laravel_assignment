@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserModel;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller{
     protected $user;
       public function __construct(UserModel $user){
         $this->user=$user;
     }
-
 
     public function register(Request $request){
       // echo $request->name;
@@ -27,7 +27,7 @@ class UserController extends Controller{
       $user = $this->user->create($user);
 
       if($user){
-        return "sucess created";
+        return Redirect::to('all');
       }else
         return "failed";
 
@@ -48,7 +48,7 @@ class UserController extends Controller{
 //        $user = $this->user->where('id',$id)->delete();
         $user = $this->user->find($id);
         $user->delete();
-        return view('/all');
+        return Redirect::to('all');
     }
 
     public function goupdate(Request $req, $id){
@@ -64,7 +64,7 @@ class UserController extends Controller{
 
         $query->save();
 
-        redirect('/all');
+        return Redirect::to('all');
     }
 
 
