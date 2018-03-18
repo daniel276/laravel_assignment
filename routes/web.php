@@ -27,11 +27,13 @@ Route::post('/register', "UserController@register");
 
 Route::get('/all',"UserController@all");
 
-Route::get('/user/${id}',"UserController@find");
+//Route::get('/user/{id}',"UserController@find");
 
-Route::get('/delete/${id}',"UserController@delete");
+Route::get('/detailForm/{id}',"UserController@find");
 
-Route::post('onupdate/${id}',"UserController@update");
+Route::get('/delete/{id}',"UserController@delete");
+
+Route::post('goupdate/{id}',"UserController@goupdate");
 
 
 ?>

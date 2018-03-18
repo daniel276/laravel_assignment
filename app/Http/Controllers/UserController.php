@@ -41,10 +41,17 @@ class UserController extends Controller{
     public function find($id){
       $user = $this->user->find($id);
 //      $user = $this->user->where("id","=",$id);
-        return view('update')->with('users',$user);
+        return view('detailForm')->with('users',$user);
     }
 
-    public function detail(Request $req, $id){
+    public function delete($id){
+//        $user = $this->user->where('id',$id)->delete();
+        $user = $this->user->find($id);
+        $user->delete();
+        return view('/all');
+    }
+
+    public function goupdate(Request $req, $id){
         $query = $this->user->find($id);
 
         $name = $req->name;
@@ -55,14 +62,11 @@ class UserController extends Controller{
         $query->email = $email;
         $query->password = $password;
 
-        $update = $query->save();
+        $query->save();
 
-        return redirect('/all');
+        redirect('/all');
     }
 
-    public function delete($id){
-        $user = $this->user->where('id',$id)->delete();
-        return view('/all');
-    }
+
 
 }
